@@ -1,10 +1,11 @@
 <div>
-    <input [(ngModel)] = "numberOfSeconds" placeholder="Please enter the frequency" (keydown)="onPressKey($event)"/>
+    <input [(ngModel)] = "frequency" placeholder="Please enter the frequency"/>
+    <button (click)="enterFrequency()"> Enter frequency </button>
 </div>
 
 <div>
-    <input [(ngModel)] = "gameNumber" placeholder="Please enter the number" (keydown)="processGame($event)"/>
+    <input [(ngModel)] = "gameNumber" placeholder="Enter a number" (keyup)="resume()"/>
+    <button (click)="enterNumber()"> Enter a number </button>
 </div>
 
-<button (click)="halt();">Halt</button>
 <p>game works!</p>

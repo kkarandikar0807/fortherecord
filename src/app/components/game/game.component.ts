@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { KeyboardHelper } from 'src/app/helpers/keyboard.helper';
-import { throwError } from 'rxjs';
+import { Constants } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-game',
@@ -9,51 +8,49 @@ import { throwError } from 'rxjs';
 })
 export class GameComponent implements OnInit {
 
-  private numberOfSeconds: number;
-  private gameNumber: number;
+  private frequency: number;
+  private gameNumber: string;
   private interval: any;
   private numAndFrequency: Map<number, number> = new Map();
 
-  constructor() { }
-
-  private onPressKey(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      this.display();
-    }
-  }
+  constructor() {}
 
   private isPerfectSquare(x: number) {
     let s: number = Math.sqrt(x);
     return (s*s === x);
   }
 
-  private display() {
-    if (this.numberOfSeconds !== undefined) {
+  private enterFrequency(): void {
+    if (this.frequency !== undefined && !isNaN(this.frequency)) {
       this.interval = setInterval(() => {
         console.log('interval');
-        
-      }, this.numberOfSeconds * 1000);
+        if (this.numAndFrequency.size === 0) {
+          console.log('No number has been entered');
+        }
+        console.log(this.gameNumber);
+        if (this.gameNumber.toLowerCase() === Constants.halt) {
+          this.halt();
+        }
+        console.log(this.numAndFrequency);
+      }, this.frequency * 1000);
+    } else {
+      console.log('enter a number');
     }
   }
 
-  private processGame(event: KeyboardEvent) {
-    if (KeyboardHelper.isEnterPressed(event)) {
-      if (this.numAndFrequency.has(this.gameNumber)) {
-        this.numAndFrequency.set(this.gameNumber, this.numAndFrequency.get(this.gameNumber) + 1);
-      } else {
-        this.numAndFrequency.set(this.gameNumber, 1);
-      }
-      console.log(this.numAndFrequency);
-    } else {
-      if (!isNaN(parseInt(event.key))) {
-        
-        this.gameNumber = parseInt(event.key);
-        console.log(this.gameNumber);
-      } else {
-        throwError("Please add a number");
-      }
-      
+  private resume(): void {
+    if (this.gameNumber === Constants.resume) {
+      this.enterFrequency();
     }
+  }
+
+  private enterNumber(): void {
+      console.log(parseInt(this.gameNumber));
+    if (this.numAndFrequency.has(parseInt(this.gameNumber))) {
+      this.numAndFrequency.set(parseInt(this.gameNumber), this.numAndFrequency.get(parseInt(this.gameNumber)) + 1);
+    } else {
+      this.numAndFrequency.set(parseInt(this.gameNumber), 1);
+    } 
   }
 
   private halt() {
@@ -61,6 +58,7 @@ export class GameComponent implements OnInit {
   }
 
   private isFibo(num: number) {
+  
     return this.isPerfectSquare(5*num*num + 4) || this.isPerfectSquare(5*num*num -4);
   }
 
