@@ -15,12 +15,12 @@ export class GameComponent implements OnInit {
 
   constructor() {}
 
-  private isPerfectSquare(x: number) {
+  isPerfectSquare(x: number) {
     let s: number = Math.sqrt(x);
     return (s*s === x);
   }
 
-  private enterFrequency(): void {
+  enterFrequency(): void {
     if (this.frequency !== undefined && !isNaN(this.frequency)) {
       this.interval = setInterval(() => {
         console.log('interval');
@@ -38,13 +38,13 @@ export class GameComponent implements OnInit {
     }
   }
 
-  private resume(): void {
+  resume(): void {
     if (this.gameNumber === Constants.resume) {
       this.enterFrequency();
     }
   }
 
-  private enterNumber(): void {
+  enterNumber(): void {
       console.log(parseInt(this.gameNumber));
     if (this.numAndFrequency.has(parseInt(this.gameNumber))) {
       this.numAndFrequency.set(parseInt(this.gameNumber), this.numAndFrequency.get(parseInt(this.gameNumber)) + 1);
@@ -53,12 +53,11 @@ export class GameComponent implements OnInit {
     } 
   }
 
-  private halt() {
+  halt() {
     clearInterval(this.interval);
   }
 
-  private isFibo(num: number) {
-  
+  isFibo(num: number) {
     return this.isPerfectSquare(5*num*num + 4) || this.isPerfectSquare(5*num*num -4);
   }
 
