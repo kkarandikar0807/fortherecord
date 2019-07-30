@@ -12,7 +12,7 @@ const routes: Routes = [{
   path: 'game',
   component: GameComponent
 }, {
-  path: 'thankyou',
+  path: 'thank-you',
   component: ThankYouComponent
 }];
 
