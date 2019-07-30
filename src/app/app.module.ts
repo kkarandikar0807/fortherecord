@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ThankYouComponent } from './components/thank-you/thank-you.component';
 import { GameModule } from './components/game/game.module';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { GameModule } from './components/game/game.module';
   imports: [
     BrowserModule,
     GameModule,
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],

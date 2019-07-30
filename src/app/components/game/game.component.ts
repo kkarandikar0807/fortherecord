@@ -16,8 +16,8 @@ export class GameComponent implements OnInit {
   constructor() {}
 
   private isPerfectSquare(x: number) {
-    let s: number = Math.sqrt(x);
-    return (s*s === x);
+    const s: number = Math.sqrt(x);
+    return (s * s === x);
   }
 
   private enterFrequency(): void {
@@ -45,12 +45,12 @@ export class GameComponent implements OnInit {
   }
 
   private enterNumber(): void {
-      console.log(parseInt(this.gameNumber));
-    if (this.numAndFrequency.has(parseInt(this.gameNumber))) {
-      this.numAndFrequency.set(parseInt(this.gameNumber), this.numAndFrequency.get(parseInt(this.gameNumber)) + 1);
+      console.log(parseInt(this.gameNumber, 10));
+      if (this.numAndFrequency.has(parseInt(this.gameNumber, 10))) {
+      this.numAndFrequency.set(parseInt(this.gameNumber, 10), this.numAndFrequency.get(parseInt(this.gameNumber, 10)) + 1);
     } else {
-      this.numAndFrequency.set(parseInt(this.gameNumber), 1);
-    } 
+      this.numAndFrequency.set(parseInt(this.gameNumber, 10), 1);
+    }
   }
 
   private halt() {
@@ -58,8 +58,8 @@ export class GameComponent implements OnInit {
   }
 
   private isFibo(num: number) {
-  
-    return this.isPerfectSquare(5*num*num + 4) || this.isPerfectSquare(5*num*num -4);
+
+    return this.isPerfectSquare(5 * num * num + 4) || this.isPerfectSquare(5 * num * num - 4);
   }
 
   ngOnInit() { }

@@ -1,11 +1,21 @@
-<div>
-    <input [(ngModel)] = "frequency" placeholder="Please enter the frequency"/>
-    <button (click)="enterFrequency()"> Enter frequency </button>
-</div>
 
-<div>
-    <input [(ngModel)] = "gameNumber" placeholder="Enter a number" (keyup)="resume()"/>
-    <button (click)="enterNumber()"> Enter a number </button>
-</div>
+<div class="card text-center">
+  <div class="card-header">
+    <h2> Lets Play! </h2>
+  </div>
+  <div class="card-body">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter a frequency"  [(ngModel)]="frequency" (keyup)="enterFrequency()">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button">Enter a Frequency</button>
+      </div>
+    </div>
 
-<p>game works!</p>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Enter a number"  [(ngModel)]="gameNumber" (keyup)="resume()">
+      <div class="input-group-append">
+        <button class="btn btn-primary" type="button">Enter a Number</button>
+      </div>
+    </div>
+  </div>
+</div>

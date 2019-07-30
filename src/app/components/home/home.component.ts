@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  private gameButton: String = 'Proceed to the Game';
-  constructor() { }
+  private gameButton = 'Proceed to the Game';
+  private router: Router;
+
+  constructor(router: Router) {
+    this.router = router;
+  }
 
   goToGame() {
+    this.router.navigateByUrl('/game');
     console.log('entered');
   }
 
