@@ -16,6 +16,7 @@ export class GameComponent implements OnInit {
   numAndFrequency: Map<number, number> = new Map();
   isFrequencyInputDisabled = false;
   sortedMap: Map<number, number>;
+  isResumeDisabled = true;
 
   toast: ToastrService;
   router: Router;
@@ -54,7 +55,8 @@ export class GameComponent implements OnInit {
   }
 
   resume(): void {
-      this.enterFrequency();
+    this.isResumeDisabled = true;
+    this.enterFrequency();
   }
 
   enterNumber(): void {
@@ -95,6 +97,7 @@ export class GameComponent implements OnInit {
 
   halt() {
     clearInterval(this.interval);
+    this.isResumeDisabled = false;
   }
 
   resetGame() {
@@ -107,7 +110,11 @@ export class GameComponent implements OnInit {
 
   quit() {
     this.halt();
-    this.router.navigate(['thank-you'], {state: {numbersAndFrequency: this.sortedMap}});
+    if (this.sortedMap === null || this.sortedMap === undefined) {
+      this.toast.error('Please play the game before you quit!!');
+    } else {
+      this.router.navigate(['thank-you'], {state: {numbersAndFrequency: this.sortedMap}});
+    }
   }
 
   ngOnInit() { }

@@ -22,7 +22,7 @@
     <div class="input-group mb-3">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button class="btn btn-primary" type="button" (click)="halt()">Halt</button>
-        <button class="btn btn-primary" type="button" (click)="resume()">Resume</button>
+        <button [disabled]="isResumeDisabled" class="btn btn-primary" type="button" (click)="resume()">Resume</button>
         <button class="btn btn-primary" type="button" (click)="quit()">Quit</button>
       </div>
     </div>
