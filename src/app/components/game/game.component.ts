@@ -54,14 +54,11 @@ export class GameComponent implements OnInit {
   }
 
   resume(): void {
-    if (this.gameNumber === Constants.resume) {
       this.enterFrequency();
-    }
   }
 
   enterNumber(): void {
       if (!isNaN(parseInt(this.gameNumber, 10))) {
-        console.log(parseInt(this.gameNumber, 10));
         if (this.numAndFrequency.has(parseInt(this.gameNumber, 10))) {
           this.numAndFrequency.set(parseInt(this.gameNumber, 10), this.numAndFrequency.get(parseInt(this.gameNumber, 10)) + 1);
         } else {
@@ -76,12 +73,6 @@ export class GameComponent implements OnInit {
           }
         }
         this.gameNumber = null;
-      } else if (this.gameNumber.toLowerCase() === Constants.halt) {
-        this.halt();
-      } else if (this.gameNumber.toLowerCase() === Constants.resume) {
-        this.resume();
-      } else if (this.gameNumber.toLowerCase() === Constants.quit) {
-        this.quit();
       } else {
         this.toast.error('Enter a valid number');
       }
@@ -90,10 +81,8 @@ export class GameComponent implements OnInit {
   transformMapToString(map: Map<number, number>) {
 
     const arrayFromMap = Array.from(map);
-    console.log(arrayFromMap);
     let s = '';
     arrayFromMap.forEach(a => {
-      console.log(a[0], a[1]);
       s += (a[0] + ': ' + a[1] + ', ');
     });
     this.toast.success(s.slice(0, s.length - 2));

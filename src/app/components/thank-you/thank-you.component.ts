@@ -20,10 +20,8 @@ export class ThankYouComponent implements OnInit {
   transformMapToString(map: any) {
 
     const arrayFromMap = Array.from(map);
-    console.log(arrayFromMap);
     let s = '';
     arrayFromMap.forEach(a => {
-      console.log(a[0], a[1]);
       s += ('Number entererd: - ' + a[0] + ',' + 'Frequency: - ' + a[1] + ', ');
     });
     this.finalOutput = s.slice(0, s.length - 2);

@@ -8,8 +8,8 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  private gameButton = 'Proceed to the Game';
-  private router: Router;
+  gameButton = 'Proceed to the Game';
+  router: Router;
 
   constructor(router: Router) {
     this.router = router;
@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   goToGame() {
     this.router.navigateByUrl('/game');
-    console.log('entered');
   }
 
   ngOnInit() { }
