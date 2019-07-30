@@ -2,20 +2,22 @@
 <div class="card text-center">
   <div class="card-header">
     <h2> Lets Play! </h2>
+    <button class="btn btn-danger" (click)="resetGame()"><i class="fa fa-refresh"></i></button>
   </div>
   <div class="card-body">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Enter a frequency"  [(ngModel)]="frequency" (keyup)="enterFrequency()">
+      <input type="text" [disabled]="isFrequencyInputDisabled" class="form-control" placeholder="Enter a frequency"  [(ngModel)]="frequency">
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">Enter a Frequency</button>
+        <button [disabled]="isFrequencyInputDisabled" class="btn btn-primary" type="button" (click)="enterFrequency()">Enter a Frequency</button>
       </div>
     </div>
 
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Enter a number"  [(ngModel)]="gameNumber" (keyup)="resume()">
+      <input type="text" class="form-control" placeholder="Enter a number"  [(ngModel)]="gameNumber">
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button">Enter a Number</button>
+        <button class="btn btn-primary" type="button" (click)="enterNumber()">Enter a Number</button>
       </div>
+
     </div>
   </div>
 </div>

@@ -9,16 +9,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class GameComponent implements OnInit {
 
-  private frequency: number;
-  private gameNumber: string;
-  private interval: any;
-  private numAndFrequency: Map<number, number> = new Map();
-  private fibo: number[] = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987];
+  frequency: number;
+  gameNumber: string;
+  interval: any;
+  numAndFrequency: Map<number, number> = new Map();
+  isFrequencyInputDisabled = false;
 
-  private toast: ToastrService;
+  toast: ToastrService;
 
   isPerfectSquare(x: number) {
     const s: number = Math.sqrt(x);
+    if (!Number.isInteger(s)) {
+      return false;
+    }
     return (s * s === x);
   }
 
@@ -27,7 +30,11 @@ export class GameComponent implements OnInit {
   }
 
   enterFrequency(): void {
-    if (this.frequency !== undefined && !isNaN(this.frequency)) {
+    if (this.frequency === undefined || isNaN(this.frequency) || this.frequency.toString().length === 0) {
+      this.frequency = null;
+      this.toast.error('Please enter a valid frequency');
+    } else {
+      this.isFrequencyInputDisabled = true;
       this.interval = setInterval(() => {
 
         if (this.numAndFrequency.size === 0) {
@@ -35,14 +42,7 @@ export class GameComponent implements OnInit {
         } else {
           this.toast.success(this.numAndFrequency.keys.toString(), this.numAndFrequency.values.toString());
         }
-        console.log(this.gameNumber);
-        if (this.gameNumber.toLowerCase() === Constants.halt) {
-          this.halt();
-        }
-        console.log(this.numAndFrequency);
       }, this.frequency * 1000);
-    } else {
-      console.log('enter a number');
     }
   }
 
@@ -60,19 +60,26 @@ export class GameComponent implements OnInit {
       this.numAndFrequency.set(parseInt(this.gameNumber, 10), 1);
     }
 
-      if (this.fibo.includes(parseInt(this.gameNumber, 10))) {
+      if (this.isFibo(parseInt(this.gameNumber, 10))) {
       this.toast.success('FIB');
     }
   }
 
 
   private isFibo(num: number) {
-
-      return this.isPerfectSquare(5 * num * num + 4) || this.isPerfectSquare(5 * num * num - 4);
+      return (this.isPerfectSquare(5 * num * num + 4) || this.isPerfectSquare(5 * num * num - 4));
     }
 
   halt() {
     clearInterval(this.interval);
+  }
+
+  resetGame() {
+    clearInterval(this.interval);
+    this.isFrequencyInputDisabled = false;
+    this.gameNumber = null;
+    this.numAndFrequency = null;
+    this.frequency = null;
   }
 
   ngOnInit() { }
