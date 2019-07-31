@@ -111,6 +111,7 @@ export class GameComponent implements OnInit {
   quit() {
     this.halt();
     if (this.sortedMap === null || this.sortedMap === undefined) {
+      this.isResumeDisabled = true;
       this.toast.error('Please play the game before you quit!!');
     } else {
       this.router.navigate(['thank-you'], {state: {numbersAndFrequency: this.sortedMap}});
